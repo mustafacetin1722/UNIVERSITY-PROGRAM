@@ -10,8 +10,11 @@ public class Course {
     private String courseDescription;
     private int credits;
     private Date startingTime;
-    private List<Student> studentName;
+    private List<Student> enrolledStudents;
     private Instructor instructor;
+
+    public Course() {
+    }
 
     public Course(int id, String courseName, String courseDescription, int credits, Instructor instructor) {
         this.id = id;
@@ -19,7 +22,7 @@ public class Course {
         this.courseDescription = courseDescription;
         this.credits = credits;
         this.startingTime = new Date();
-        this.studentName = new ArrayList<>();
+        this.enrolledStudents = new ArrayList<>();
         this.instructor = instructor;
     }
 
@@ -65,12 +68,12 @@ public class Course {
         this.startingTime = startingTime;
     }
 
-    public List<Student> getStudentName() {
-        return studentName;
+    public List<Student> getEnrolledStudents() {
+        return enrolledStudents;
     }
 
-    public void setStudentName(List<Student> studentName) {
-        this.studentName = studentName;
+    public void setEnrolledStudents(List<Student> enrolledStudents) {
+        this.enrolledStudents = enrolledStudents;
     }
 
     public Instructor getInstructor() {

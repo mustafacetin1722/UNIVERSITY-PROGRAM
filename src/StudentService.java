@@ -5,9 +5,7 @@ public class StudentService {
     private List<Student> studentList;
     private CourseService courseService;
 
-    public StudentService() {
-        this.studentList = new ArrayList<>();
-    }
+
 
     public StudentService(CourseService courseService) {
         this.studentList = new ArrayList<>();
@@ -18,49 +16,33 @@ public class StudentService {
         if (student!=null && !student.getFullName().isEmpty() && !student.getEmail().isEmpty()
                 && !student.getIdentityNumber().isEmpty() && !student.getPassword().isEmpty()){
             studentList.add(student);
+            System.out.println("Öğrenci başarılı bir şekilde listeye eklenmiştir");
         }else {
             System.out.println("Eksik bilgi girdiniz lütfen bütün boşlukları doldurunuz.");
         }
     }
     public void addStudentToCourse(int studentId, int courseId) {
         Student student = getStudentById(studentId);
-        CourseService courseService = new CourseService();
         Course course = courseService.getCourseById(courseId);
         if (student != null && course != null) {
-            course.getStudentName().add(student);
+            course.getEnrolledStudents().add(student);
             student.getEnrolledCourses().add(course);
             System.out.println("Öğrenci " + student.getFullName() + " kursa eklendi " + course.getCourseName());
         } else {
             System.out.println("Öğrenci veya Kurs Bulunamadı.");
         }
     }
-  /*  public void addStudentToCourse(int studentId, int courseId) {
-        Student student = getStudentById(studentId);
-        Course course = courseService.getCourseById(courseId);
-        if (student != null && course != null) {
-            if (course.getStudentName() == null) {
-                course.setStudentName(new ArrayList<>());
-            }
-            if (student.getEnrolledCourses() == null) {
-                student.setEnrolledCourses(new ArrayList<>());
-            }
-            course.getStudentName().add(student);
-            student.getEnrolledCourses().add(course);
-            System.out.println("Öğrenci " + student.getFullName() + " kursa eklendi " + course.getCourseName());
-        } else {
-            System.out.println("Öğrenci veya Kurs Bulunamadı.");
-        }
-    }*/
+
 
     public void updateStudentDetails1(int id,String newIdentityNumber,String newFullName,
-                                     String newEmail,String newPssword,List<Course> newEnrolledCourses){
+                                     String newEmail,String newPasword,List<Course> newEnrolledCourses){
         boolean studentFound = false;
         for (Student student:studentList){
             if (student.getId()==id){
                 student.setFullName(newFullName);
                 student.setIdentityNumber(newIdentityNumber);
                 student.setEmail(newEmail);
-                student.setPassword(newPssword);
+                student.setPassword(newPasword);
                 student.setEnrolledCourses(newEnrolledCourses);
             }
         }
@@ -80,7 +62,7 @@ public class StudentService {
         for (Student student:studentList){
             if (student.getId()==id){
                 for (Course course:student.getEnrolledCourses()){
-                    System.out.println(course.getCourseName()+"var");
+                    System.out.println("Kurs: "+course.getCourseName());
                 }
                 studentFound=true;
                 break;
