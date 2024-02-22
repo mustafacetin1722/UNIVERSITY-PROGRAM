@@ -99,7 +99,7 @@ public class Main {
                         System.out.println("Öğrenci ID giriniz : ");
                         int id4 = scanner.nextInt();
                         scanner.nextLine();
-                        studentService.studentCourse(id4);
+                        studentService.reportStudentEnrolledCourses(id4);
                         break;
                     case 8:
                         courseService.listAllCourses();

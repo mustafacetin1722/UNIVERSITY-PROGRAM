@@ -34,8 +34,7 @@ public class StudentService {
     }
 
 
-    public void updateStudentDetails1(int id,String newIdentityNumber,String newFullName,
-                                     String newEmail,String newPasword,List<Course> newEnrolledCourses){
+    public void updateStudentDetails(int id,String newIdentityNumber,String newFullName, String newEmail,String newPasword){
         boolean studentFound = false;
         for (Student student:studentList){
             if (student.getId()==id){
@@ -43,33 +42,28 @@ public class StudentService {
                 student.setIdentityNumber(newIdentityNumber);
                 student.setEmail(newEmail);
                 student.setPassword(newPasword);
-                student.setEnrolledCourses(newEnrolledCourses);
             }
         }
         if (!studentFound){
             System.out.println("Girilen " + id + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
         }
     }
-    public void updateStudentDetails(int id, Student student) {
-        for (Student updateStudent:studentList){
-            if (updateStudent.getId()==id){
-                updateStudent.setFullName(student.getFullName());
-            }
-        }
-    }
-    public void studentCourse(int id){
-        boolean studentFound=false;
+
+    public void reportStudentEnrolledCourses(int stundentNumber){
+        List<Course> courses = new ArrayList<>();
         for (Student student:studentList){
-            if (student.getId()==id){
-                for (Course course:student.getEnrolledCourses()){
-                    System.out.println("Kurs: "+course.getCourseName());
-                }
-                studentFound=true;
+            if (student.getId() == stundentNumber){
+                courses= student.getEnrolledCourses();
                 break;
+                }
+            }
+        if (!courses.isEmpty()){
+            for (Course course : courses){
+                System.out.println("Kurs: "+course.getCourseName());
             }
         }
-        if (!studentFound){
-            System.out.println("Öğrenci bulunamadı.");
+        else {
+            System.out.println("Girilen " + stundentNumber + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
         }
     }
     public List<Student> listAllStudents(){
@@ -94,5 +88,32 @@ public class StudentService {
             }
         }
         return null;
+    }
+    public String calculateLetterGradeForStudent(int studentId , int courseId){
+       for (Student student: studentList){
+           if (student.getId()==studentId){
+               for (Course course : student.getEnrolledCourses()){
+                   if (course.getId()==courseId){
+                       System.out.println("Alığı Ders : "+course.getCourseName());
+                       System.out.println("Ortalama Puan : " + course.getGrade());
+                       System.out.println("Harf Notu : "+calculateLetterGrade(course.getGrade()));
+                   }
+               }
+           }
+       }
+       return "Öğrenci veya Kurs Bulunamadı.";
+    }
+    private String calculateLetterGrade(double grade) {
+        if (grade >= 90) {
+            return "A";
+        } else if (grade >= 80) {
+            return "B";
+        } else if (grade >= 70) {
+            return "C";
+        } else if (grade >= 60) {
+            return "D";
+        } else {
+            return "F";
+        }
     }
 }

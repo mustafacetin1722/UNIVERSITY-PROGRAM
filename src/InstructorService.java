@@ -18,17 +18,18 @@ public class InstructorService {
         }
     }
     public void viewInstructorTaughtCourses(int instructorNumber) {
-        boolean instructorFound = false;
+        List<Course> courses = new ArrayList<>();
         for (Instructor instructor : instructorList){
             if (instructor.getId()==instructorNumber){
-                for (Course course : instructor.getTaughtCourses()) {
-                    System.out.println("Kurs : " + course.getCourseName());
+                courses = instructor.getTaughtCourses();
                 }
-                instructorFound = true;
-                break;
+            }
+            if (!courses.isEmpty()){
+                for (Course course : courses){
+                System.out.println("Kurs : " + course.getCourseName());
             }
         }
-        if (!instructorFound){
+        else {
             System.out.println("Girilen " + instructorNumber + " Numaralı ID'de Eğitmen Bulunmamaktadır.");
         }
     }

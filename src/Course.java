@@ -9,12 +9,11 @@ public class Course {
     private String courseName;
     private String courseDescription;
     private int credits;
+    private double grade;
     private Date startingTime;
     private List<Student> enrolledStudents;
     private Instructor instructor;
 
-    public Course() {
-    }
 
     public Course(int id, String courseName, String courseDescription, int credits, Instructor instructor) {
         this.id = id;
@@ -24,9 +23,16 @@ public class Course {
         this.startingTime = new Date();
         this.enrolledStudents = new ArrayList<>();
         this.instructor = instructor;
+        this.grade = grade;
     }
 
+    public double getGrade() {
+        return grade;
+    }
 
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
 
     public int getId() {
         return id;
