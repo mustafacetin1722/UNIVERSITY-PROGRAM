@@ -159,12 +159,12 @@ public class Main {
                         System.out.println("Öğrenci ID : ");
                         int assignStudentId = scanner.nextInt();
                         scanner.nextLine();
-                        System.out.println("Eğitmen ID : ");
-                        int assignInstructorId = scanner.nextInt();
+                        System.out.println("Course ID : ");
+                        int assignCourseId = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("Öğrenci puanı : ");
                         double assignGrade = scanner.nextDouble();
-                        studentService.assignGradeToStudent(assignStudentId,assignInstructorId,assignGrade);
+                        studentService.assignGradeToStudent(assignStudentId,assignCourseId,assignGrade);
                         break;
                     case 15:
                         System.out.println("Kurs ID : ");
@@ -182,10 +182,10 @@ public class Main {
                         System.out.println("Öğrenci ID : ");
                         int letterStudentId = scanner.nextInt();
                         scanner.nextLine();
-                        System.out.println("Eğitmen ID : ");
-                        int letterInstructorId = scanner.nextInt();
+                        System.out.println("Course ID : ");
+                        int letterCourseId = scanner.nextInt();
                         scanner.nextLine();
-                        studentService.calculateLetterGradeForStudent(letterStudentId,letterInstructorId);
+                        studentService.calculateLetterGradeForStudent(letterStudentId,letterCourseId);
                         break;
                     case 0:
                         System.exit(0);
