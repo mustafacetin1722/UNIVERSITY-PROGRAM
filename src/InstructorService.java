@@ -69,4 +69,23 @@ public class InstructorService {
         return null;
     }
 
+   /* public double calculateAverageSuccessGradeForInstructorCourses(int instructorId) {
+        double totalSuccessGrade = 0.0;
+        List<Course> courses = new ArrayList<>();
+        for (Instructor instructor : instructorList){
+            if (instructor.getId()==instructorId){
+                courses = instructor.getTaughtCourses();
+            }
+        }
+        if (courses!=null){
+            for (Course course : courses){
+                System.out.println("Kurs : " + course.getCourseName());
+                totalSuccessGrade += course.getGrade();
+            }
+        }
+        else {
+            System.out.println("Girilen " + instructorId + " Numaralı ID'de Eğitmen Bulunmamaktadır.");
+        }
+
+    }*/
 }

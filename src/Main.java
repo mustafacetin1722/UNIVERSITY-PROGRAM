@@ -25,6 +25,10 @@ public class Main {
             System.out.println("11. Kurs Güncelle : ");
             System.out.println("12. Eğitmenin verdiği kurslar : ");
             System.out.println("13. Öğrenci En Fazla Olan Kurs : ");
+            System.out.println("14. Öğrenci Puanı Ata : ");
+            System.out.println("15. Kurs Puanı Ortalama : ");
+            System.out.println("16. Öğrenci Kurs Puanları  : ");
+            System.out.println("17. Öğrenci Harf Notu Hesaplama : ");
             System.out.println("0.  Çıkış...");
             try {
                 int chocee = scanner.nextInt();
@@ -99,7 +103,8 @@ public class Main {
                         System.out.println("Öğrenci ID giriniz : ");
                         int id4 = scanner.nextInt();
                         scanner.nextLine();
-                        studentService.reportStudentEnrolledCourses(id4);
+                        //studentService.reportStudentEnrolledCourses(id4);
+                        studentService.getStudentEnrolledCourses(id4);
                         break;
                     case 8:
                         courseService.listAllCourses();
@@ -149,6 +154,38 @@ public class Main {
                         break;
                     case 13:
                         courseService.findCourseWithMostParticipants();
+                        break;
+                    case 14:
+                        System.out.println("Öğrenci ID : ");
+                        int assignStudentId = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Eğitmen ID : ");
+                        int assignInstructorId = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Öğrenci puanı : ");
+                        double assignGrade = scanner.nextDouble();
+                        studentService.assignGradeToStudent(assignStudentId,assignInstructorId,assignGrade);
+                        break;
+                    case 15:
+                        System.out.println("Kurs ID : ");
+                        int calculateCourseId = scanner.nextInt();
+                        scanner.nextLine();
+                        courseService.calculateAverageGradeForCourse(calculateCourseId);
+                        break;
+                    case 16:
+                        System.out.println("Öğrenci ID : ");
+                        int printStudentId = scanner.nextInt();
+                        scanner.nextLine();
+                        studentService.printStudentGrade(printStudentId);
+                        break;
+                    case 17:
+                        System.out.println("Öğrenci ID : ");
+                        int letterStudentId = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Eğitmen ID : ");
+                        int letterInstructorId = scanner.nextInt();
+                        scanner.nextLine();
+                        studentService.calculateLetterGradeForStudent(letterStudentId,letterInstructorId);
                         break;
                     case 0:
                         System.exit(0);

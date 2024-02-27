@@ -66,6 +66,24 @@ public class StudentService {
             System.out.println("Girilen " + stundentNumber + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
         }
     }
+   public List<Course> getStudentEnrolledCourses(int studentId) {
+       List<Course> courses = new ArrayList<>();
+       for (Student student:studentList){
+           if (student.getId() == studentId){
+               courses= student.getEnrolledCourses();
+               break;
+           }
+       }
+       if (!courses.isEmpty()){
+           for (Course course : courses){
+               System.out.println("Kurs: "+course.getCourseName());
+           }
+       }
+       else {
+           System.out.println("Girilen " + studentId + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
+       }
+       return courses;
+   }
     public List<Student> listAllStudents(){
         System.out.printf("%-15s %-20s %-15s %-25s %-15s\n", "Öğrenci ID", "Öğrenci Adı", "Öğrenci TCNo", "Öğrenci Email", "Öğrenci Şifresi");
         System.out.println("-----------------------------------------------------------------------------------------------");
@@ -114,6 +132,48 @@ public class StudentService {
             return "D";
         } else {
             return "F";
+        }
+    }
+    public void assignGradeToStudent(int studentId, int courseId, double grade) {
+        Student student = getStudentById(studentId);
+        if (student!=null){
+            Course course = courseService.getCourseById(courseId);
+            if (course!=null){
+                course.setGrade(grade);
+                System.out.println("Öğrenciye not başarıyla atanmıştır.");
+            }else {
+                System.out.println("Kurs bulunamadı.");
+            }
+        }else {
+            System.out.println("Öğrenci bulunamadı.");
+        }
+    }
+    public void printStudentGrade2(int studentId) {
+
+        Student student = getStudentById(studentId);
+        if (student != null){
+            for (Course course : student.getEnrolledCourses()){
+                System.out.println("Öğrenci " + student.getFullName() + " için not: " + course.getGrade() );
+            }
+        }else {
+            System.out.println("Öğrenci bulunamadı.");
+        }
+        }
+    public void printStudentGrade(int studentId) {
+        List<Course> courses = new ArrayList<>();
+        for (Student student:studentList){
+            if (student.getId() == studentId){
+                courses= student.getEnrolledCourses();
+                break;
+            }
+        }
+        if (!courses.isEmpty()){
+            for (Course course : courses){
+                System.out.println("Kurs: "+course.getCourseName() + "puan : "+course.getGrade());
+            }
+        }
+        else {
+            System.out.println("Girilen " + studentId + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
         }
     }
 }
