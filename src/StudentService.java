@@ -166,21 +166,5 @@ public class StudentService {
             System.out.println("Öğrenci bulunamadı.");
         }
     }
-    /*public void printStudentGrade(int studentId) {
-        List<Course> courses = new ArrayList<>();
-        for (Student student:studentList){
-            if (student.getId() == studentId){
-                courses= student.getEnrolledCourses();
-                break;
-            }
-        }
-        if (!courses.isEmpty()){
-            for (Course course : courses){
-                System.out.println("Kurs: "+course.getCourseName() + "puan : "+course.getAverageGrade());
-            }
-        }
-        else {
-            System.out.println("Girilen " + studentId + " Numaralı ID'de Öğrenci Bulunmamaktadır.");
-        }
-    }*/
+    
 }
