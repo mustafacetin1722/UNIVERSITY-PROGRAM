@@ -29,6 +29,7 @@ public class Main {
             System.out.println("15. Kurs Puanı Ortalama : ");
             System.out.println("16. Öğrenci Kurs Puanları  : ");
             System.out.println("17. Öğrenci Harf Notu Hesaplama : ");
+            System.out.println("18. Eğitmen Verdiği Dersler Not Ortalaması : ");
             System.out.println("0.  Çıkış...");
             try {
                 int chocee = scanner.nextInt();
@@ -174,9 +175,9 @@ public class Main {
                         break;
                     case 16:
                         System.out.println("Öğrenci ID : ");
-                        int printStudentId = scanner.nextInt();
+                        int printGradeStudentId = scanner.nextInt();
                         scanner.nextLine();
-                        studentService.printStudentGrade(printStudentId);
+                        studentService.printStudentGrade(printGradeStudentId);
                         break;
                     case 17:
                         System.out.println("Öğrenci ID : ");
@@ -186,6 +187,12 @@ public class Main {
                         int letterCourseId = scanner.nextInt();
                         scanner.nextLine();
                         studentService.calculateLetterGradeForStudent(letterStudentId,letterCourseId);
+                        break;
+                    case 18:
+                        System.out.println("Eğitmen ID : ");
+                        int gradeInstructrorId=scanner.nextInt();
+                        scanner.nextLine();
+                        courseService.calculateAverageSuccessGradeForInstructorCourses(gradeInstructrorId);
                         break;
                     case 0:
                         System.exit(0);

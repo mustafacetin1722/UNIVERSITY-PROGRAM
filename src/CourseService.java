@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CourseService {
     private List<Course> courseList;
@@ -105,20 +106,43 @@ public class CourseService {
         }
         return courseList;
     }
-
     public double calculateAverageGradeForCourse(int courseId) {
         double totalGrade = 0.0;
         int totalStudents = 0;
 
         Course targetCourse = getCourseById(courseId);
+        if (targetCourse != null) {
+            Map<Integer, Double> grades = targetCourse.getStudentGrades();
+            if (!grades.isEmpty()) {
+                for (double grade : grades.values()) {
+                    totalGrade += grade;
+                    totalStudents++;
+                }
+                double averageGrade = totalGrade / totalStudents;
+                System.out.println("Kurs Adı: " + targetCourse.getCourseName());
+                System.out.println("puanı : " + averageGrade);
+                return averageGrade;
+            } else {
+                System.out.println("Kursa kayıtlı öğrenci bulunmamaktadır.");
+                return 0.0;
+            }
+        } else {
+            System.out.println("Belirtilen kurs bulunamadı.");
+            return 0.0;
+        }
+    }
+  /*  public double calculateAverageGradeForCourse(int courseId) {
+        double totalGrade = 0.0;
+        int totalStudents = 0;
 
+        Course targetCourse = getCourseById(courseId);
         if (targetCourse != null) {
             List<Course> courses =new ArrayList<>();
             for (Student student : targetCourse.getEnrolledStudents()) {
                 courses= student.getEnrolledCourses();
             }if (courses!=null){
                 for (Course course : courses ){
-                    totalGrade+=course.getGrade();
+                    totalGrade+=course.getAverageGrade();
                     totalStudents++;
             }
                 double averageGrade = totalGrade / totalStudents;
@@ -133,5 +157,25 @@ public class CourseService {
             System.out.println("Belirtilen kurs bulunamadı.");
             return 0.0;
         }
+    }*/
+
+    public double calculateAverageSuccessGradeForInstructorCourses(int instructorId) {
+        double totalSuccessGrade = 0.0;
+        Instructor instructor = instructorService.getInstructorById(instructorId);
+        if (instructor!=null){
+            List<Course> courses = instructor.getTaughtCourses();
+            if (courses!=null){
+                for (Course course : courses){
+                    totalSuccessGrade += calculateAverageGradeForCourse(course.getId());
+        }
+                return totalSuccessGrade / courses.size();
+            }else {
+                System.out.println("Eğitmenin ders kaydı bulunmamaktadır.");
+            }
+        }
+        else {
+            System.out.println("Girilen " + instructorId + " Numaralı ID'de Eğitmen Bulunmamaktadır.");
+        }
+              return 0.0;
     }
 }

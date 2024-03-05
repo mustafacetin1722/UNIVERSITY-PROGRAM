@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Course {
 
@@ -9,10 +6,11 @@ public class Course {
     private String courseName;
     private String courseDescription;
     private int credits;
-    private double grade;
+    private double averageGrade;
     private Date startingTime;
     private List<Student> enrolledStudents;
     private Instructor instructor;
+    private Map<Integer , Double> studentGrades;
 
 
     public Course(int id, String courseName, String courseDescription, int credits, Instructor instructor) {
@@ -23,15 +21,24 @@ public class Course {
         this.startingTime = new Date();
         this.enrolledStudents = new ArrayList<>();
         this.instructor = instructor;
-        this.grade = grade;
+        this.averageGrade = averageGrade;
+        this.studentGrades = new HashMap<>();
     }
 
-    public double getGrade() {
-        return grade;
+    public Map<Integer, Double> getStudentGrades() {
+        return studentGrades;
     }
 
-    public void setGrade(double grade) {
-        this.grade = grade;
+    public void setStudentGrades(Map<Integer, Double> studentGrades) {
+        this.studentGrades = studentGrades;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
     }
 
     public int getId() {
